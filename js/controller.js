@@ -78,6 +78,9 @@ angular.module('CompanyApp', ['ui.bootstrap'])
                 });
 
                 modalInstance.result.then(function (newSubcompany) {
+                    if(angular.isUndefined(company.subcompanies)) {
+                        company.subcompanies = [];
+                    }
                     company.subcompanies.push(newSubcompany);
                 });
             }
