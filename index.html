@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="CompanyApp">
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="libs/jquery.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/ui-bootstrap.min.js"></script>
+    <script src="js/controller.js"></script>
+    <!--<script src="components/modal/modal.js"></script>-->
+</head>
+<body ng-controller="CompanyController">
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="text-center">
+                    Company Tree
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"
+                            ng-click="addCompany()"></span>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div ng-repeat="company in companies track by $index">
+                    <h3>
+                        {{company.name}}
+
+                        <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"
+                            ng-click="removeCompany($index)"></span>
+                        <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"
+                              ng-click="editCompany(company)"></span>
+                    </h3>
+                    <h5>Annual Own Earnings: {{company.earnings | currency}}</h5>
+                    <h5 ng-init="company.totalEarnings = company.earnings">Annual Total Earnings: {{company.totalEarnings | currency}}</h5>
+                    <a ng-click="addSubcompany(company)">Add subcompany</a>
+                    <div ng-show="company.subcompanies.length > 0">
+                        <h4>Subcompanies:</h4>
+                        <ul ng-repeat="subcompany in company.subcompanies track by $index"
+                            ng-init="company.totalEarnings = company.totalEarnings + subcompany.earnings">
+                            <li>
+                                <h5>Name: {{subcompany.name}}
+                                    <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"
+                                          ng-click="removeCompany($index, company.subcompanies)"></span>
+                                    <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"
+                                      ng-click="editCompany(subcompany)"></span>
+                                </h5>
+                                Earnings: {{subcompany.earnings | currency}}
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

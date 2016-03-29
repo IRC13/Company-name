@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title text-center" ng-show="originCompany">You can edit company: {{originCompany.name}}</h3>
+    <h3 class="modal-title text-center" ng-show="!originCompany">Create new company</h3>
+</div>
+<div class="modal-body">
+    <label>
+        Subcompany name <br/>
+        <input type="text" ng-model="company.name" placeholder="Subcompany name">
+    </label>
+    <label>
+        Subcompany earnings <br/>
+        <input type="text" ng-model="company.earnings" placeholder="Subcompany earnings">
+    </label>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
